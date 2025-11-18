@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pathfinding Visualizer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🎯 Pathfinding Visualizer</h1>
+        <p class="subtitle">
+          Visualisasi Algoritma BFS & Dijkstra untuk Mencari Jalur Terpendek
+        </p>
+      </header>
+
+      <div class="controls">
+        <select id="algorithmSelect">
+          <option value="bfs">BFS (Breadth-First Search)</option>
+          <option value="dijkstra">Dijkstra's Algorithm</option>
+        </select>
+        <button class="btn btn-success" id="startBtn">
+          ▶ Start Visualization
+        </button>
+        <button class="btn btn-danger" id="clearPathBtn">🔄 Clear Path</button>
+        <button class="btn btn-warning" id="clearWallsBtn">
+          🧱 Clear Walls
+        </button>
+        <button class="btn btn-primary" id="resetBtn">🔃 Reset All</button>
+        <button class="btn btn-info" id="howToUseBtn">❓ How to Use</button>
+        <button class="btn btn-info" id="aboutBtn">📚 About Algorithms</button>
+      </div>
+
+      <div class="mode-selector">
+        <label>
+          <input type="radio" name="mode" value="wall" checked />
+          <span>🧱 Draw Walls</span>
+        </label>
+        <label>
+          <input type="radio" name="mode" value="start" />
+          <span>🟢 Move Start</span>
+        </label>
+        <label>
+          <input type="radio" name="mode" value="end" />
+          <span>🔴 Move End</span>
+        </label>
+      </div>
+
+      <div class="legend">
+        <div class="legend-item">
+          <div
+            class="legend-box"
+            style="
+              background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            "
+          ></div>
+          <span>Start Node</span>
+        </div>
+        <div class="legend-item">
+          <div
+            class="legend-box"
+            style="
+              background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+            "
+          ></div>
+          <span>End Node</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-box" style="background: #2c3e50"></div>
+          <span>Wall</span>
+        </div>
+        <div class="legend-item">
+          <div
+            class="legend-box"
+            style="
+              background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            "
+          ></div>
+          <span>Visited</span>
+        </div>
+        <div class="legend-item">
+          <div
+            class="legend-box"
+            style="
+              background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            "
+          ></div>
+          <span>Shortest Path</span>
+        </div>
+      </div>
+
+      <div class="grid-container">
+        <div class="grid" id="grid"></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-value" id="visitedCount">0</div>
+          <div class="stat-label">Nodes Visited</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="pathLength">0</div>
+          <div class="stat-label">Path Length</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="executionTime">0ms</div>
+          <div class="stat-label">Execution Time</div>
+        </div>
+      </div>
+
+      <footer>
+        <p><strong>Quiz 2 - Graph Algorithm Project</strong></p>
+        <div class="team-info">
+          <p>👥 Team Members:</p>
+          <p>Farrel Ahmad Lazuardi - UI/UX Design & BFS Implementation</p>
+          <p>
+            Ziyad Raziq Lahitidra Afey - Backend Logic & Dijkstra Implementation
+          </p>
+          <p>
+            Farrel Ahmad Lazuardi & Ziyad Raziq Lahitidra Afey - Testing &
+            Analysis
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Modal How to Use -->
+    <div id="howToUseModal" class="modal">
+      <div class="modal-content">
+        <span class="close" data-modal="howToUseModal">&times;</span>
+        <h2>📖 How to Use</h2>
+        <div class="modal-body">
+          <h3>🎮 Getting Started:</h3>
+          <ol>
+            <li>
+              <strong>Choose Mode:</strong> Select between Draw Walls, Move
+              Start, or Move End
+            </li>
+            <li>
+              <strong>Draw Walls Mode:</strong> Click and drag on the grid to
+              create obstacles
+            </li>
+            <li>
+              <strong>Move Start/End:</strong> Click on any empty cell to place
+              the start or end node
+            </li>
+            <li>
+              <strong>Select Algorithm:</strong> Choose between BFS or Dijkstra
+              from the dropdown
+            </li>
+            <li>
+              <strong>Start Visualization:</strong> Click "Start Visualization"
+              to see the algorithm in action
+            </li>
+          </ol>
+
+          <h3>🎯 Button Functions:</h3>
+          <ul>
+            <li>
+              <strong>▶ Start Visualization:</strong> Run the selected algorithm
+            </li>
+            <li>
+              <strong>🔄 Clear Path:</strong> Remove visited nodes and path
+              (keeps walls)
+            </li>
+            <li>
+              <strong>🧱 Clear Walls:</strong> Remove all walls from the grid
+            </li>
+            <li>
+              <strong>🔃 Reset All:</strong> Reset everything to default state
+            </li>
+          </ul>
+
+          <h3>💡 Tips:</h3>
+          <ul>
+            <li>Create mazes by drawing walls to test different scenarios</li>
+            <li>Move start and end nodes to different positions</li>
+            <li>Compare BFS and Dijkstra performance on the same maze</li>
+            <li>Watch the statistics to see algorithm efficiency</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal About Algorithms -->
+    <div id="aboutModal" class="modal">
+      <div class="modal-content">
+        <span class="close" data-modal="aboutModal">&times;</span>
+        <h2>📚 About Algorithms</h2>
+        <div class="modal-body">
+          <h3>🔵 BFS (Breadth-First Search)</h3>
+          <p>
+            <strong>Description:</strong> BFS adalah algoritma traversal graph
+            yang mengeksplorasi semua node pada level saat ini sebelum pindah ke
+            level berikutnya.
+          </p>
+
+          <p><strong>How it Works:</strong></p>
+          <ol>
+            <li>Mulai dari start node dan masukkan ke queue</li>
+            <li>Ambil node dari queue dan kunjungi semua tetangganya</li>
+            <li>
+              Tandai node sebagai visited dan tambahkan tetangga yang belum
+              dikunjungi ke queue
+            </li>
+            <li>Ulangi sampai menemukan end node atau queue kosong</li>
+          </ol>
+
+          <p><strong>Complexity:</strong></p>
+          <ul>
+            <li>
+              Time Complexity: O(V + E) - V adalah jumlah vertices, E adalah
+              jumlah edges
+            </li>
+            <li>
+              Space Complexity: O(V) - untuk menyimpan queue dan visited nodes
+            </li>
+          </ul>
+
+          <p><strong>Best Use Case:</strong></p>
+          <ul>
+            <li>Unweighted graphs (semua edge memiliki bobot sama)</li>
+            <li>Mencari jalur terpendek dalam unweighted graph</li>
+            <li>Level-order traversal</li>
+          </ul>
+
+          <hr />
+
+          <h3>🟢 Dijkstra's Algorithm</h3>
+          <p>
+            <strong>Description:</strong> Dijkstra adalah algoritma greedy untuk
+            mencari jalur terpendek dari satu node ke semua node lainnya dalam
+            weighted graph dengan bobot non-negatif.
+          </p>
+
+          <p><strong>How it Works:</strong></p>
+          <ol>
+            <li>Set jarak start node = 0, node lain = infinity</li>
+            <li>Pilih node dengan jarak terkecil yang belum dikunjungi</li>
+            <li>
+              Update jarak ke tetangga jika ditemukan jalur yang lebih pendek
+            </li>
+            <li>Tandai node sebagai visited</li>
+            <li>Ulangi sampai semua node dikunjungi atau end node tercapai</li>
+          </ol>
+
+          <p><strong>Complexity:</strong></p>
+          <ul>
+            <li>Time Complexity: O((V + E) log V) - dengan priority queue</li>
+            <li>Space Complexity: O(V) - untuk menyimpan distance array</li>
+          </ul>
+
+          <p><strong>Best Use Case:</strong></p>
+          <ul>
+            <li>Weighted graphs dengan bobot positif</li>
+            <li>Mencari shortest path dalam road networks</li>
+            <li>GPS navigation systems</li>
+          </ul>
+
+          <hr />
+
+          <h3>⚖️ Comparison:</h3>
+          <table
+            style="width: 100%; border-collapse: collapse; margin-top: 10px"
+          >
+            <tr style="background: #f0f0f0">
+              <th style="padding: 10px; border: 1px solid #ddd">Aspect</th>
+              <th style="padding: 10px; border: 1px solid #ddd">BFS</th>
+              <th style="padding: 10px; border: 1px solid #ddd">Dijkstra</th>
+            </tr>
+            <tr>
+              <td style="padding: 10px; border: 1px solid #ddd">Graph Type</td>
+              <td style="padding: 10px; border: 1px solid #ddd">Unweighted</td>
+              <td style="padding: 10px; border: 1px solid #ddd">Weighted</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px; border: 1px solid #ddd">
+                Data Structure
+              </td>
+              <td style="padding: 10px; border: 1px solid #ddd">Queue</td>
+              <td style="padding: 10px; border: 1px solid #ddd">
+                Priority Queue
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 10px; border: 1px solid #ddd">Speed</td>
+              <td style="padding: 10px; border: 1px solid #ddd">Faster</td>
+              <td style="padding: 10px; border: 1px solid #ddd">Slower</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px; border: 1px solid #ddd">
+                Optimal Path
+              </td>
+              <td style="padding: 10px; border: 1px solid #ddd">
+                Yes (unweighted)
+              </td>
+              <td style="padding: 10px; border: 1px solid #ddd">
+                Yes (weighted)
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
