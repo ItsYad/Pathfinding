@@ -1,24 +1,12 @@
-# 🎯 Pathfinding Visualizer
+#  Pathfinding Visualizer
 
 Aplikasi web interaktif untuk memvisualisasikan algoritma **BFS (Breadth-First Search)** dan **Dijkstra's Algorithm** dalam mencari jalur terpendek.
 
-## ✨ Features
-
-- ✅ Implementasi 2 algoritma graph (BFS & Dijkstra)
-- ✅ Visualisasi animasi real-time
-- ✅ Grid interaktif untuk membuat maze
-- ✅ Mode untuk memindahkan start dan end node
-- ✅ Modal "How to Use" dan "About Algorithms"
-- ✅ Statistik performa (nodes visited, path length, execution time)
-- ✅ UI/UX modern dengan gradient dan animasi
-- ✅ Responsive design untuk mobile dan desktop
-
-## 🛠️ Technologies
+## Technologies
 
 - HTML5
 - CSS3 (Gradients, Animations, Flexbox)
 - Vanilla JavaScript (ES6+)
-- No frameworks or libraries
 
 ## 📥 Installation & Usage
 
@@ -44,7 +32,7 @@ Aplikasi web interaktif untuk memvisualisasikan algoritma **BFS (Breadth-First S
    - Klik "Start Visualization"
    - Lihat modal "How to Use" untuk detail lengkap
 
-## 📚 Algorithm Explanation
+## Algorithm Explanation
 
 ### BFS (Breadth-First Search)
 
@@ -60,7 +48,7 @@ Aplikasi web interaktif untuk memvisualisasikan algoritma **BFS (Breadth-First S
 - **Best for:** Weighted graphs dengan bobot positif
 - **Karakteristik:** Greedy algorithm yang optimal
 
-## 👥 Team Contribution
+## Team Contribution
 
 **Quiz 2 - Graph Algorithm Project**
 
@@ -81,7 +69,7 @@ Aplikasi web interaktif untuk memvisualisasikan algoritma **BFS (Breadth-First S
   - Analisis performa algoritma
   - Menulis dokumentasi dan README
 
-## 📊 Project Structure
+## Project Structure
 
 ```
 pathfinding-visualizer/
@@ -92,7 +80,7 @@ pathfinding-visualizer/
 ├── README.md           # Documentation
 ```
 
-## 🎓 Learning Outcomes
+## Learning Outcomes
 
 Project ini mengajarkan:
 
